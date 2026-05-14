@@ -1,8 +1,8 @@
 import fs from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
-import { isToolCallEventType, type ExtensionAPI, type ExtensionCommandContext } from "@mariozechner/pi-coding-agent"
-import { Type } from "@sinclair/typebox"
+import { isToolCallEventType, type ExtensionAPI, type ExtensionCommandContext } from "@earendil-works/pi-coding-agent"
+import { Type } from "typebox"
 
 export type SkillEntry = {
   name: string
@@ -144,10 +144,11 @@ export function getSkillIndex(pi: ExtensionAPI, cwd: string): SkillEntry[] {
   const entries: SkillEntry[] = []
 
   for (const command of pi.getCommands()) {
-    if (command.source !== "skill" || !command.path) continue
+    const commandPath = command.sourceInfo?.path ?? (command as { path?: string }).path
+    if (command.source !== "skill" || !commandPath) continue
 
     const name = normalizeSkillName(command.name)
-    const filePath = normalizeReadPath(command.path, cwd)
+    const filePath = normalizeReadPath(commandPath, cwd)
     const key = `${name}:${filePath}`
     if (!name || seen.has(key)) continue
 
