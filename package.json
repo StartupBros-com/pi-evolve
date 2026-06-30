@@ -43,10 +43,10 @@
     "typebox": "*"
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "^0.75.4",
+    "@earendil-works/pi-coding-agent": "^0.80.2",
     "@types/node": "^24.3.0",
-    "tsx": "^4.20.5",
-    "typebox": "^1.1.38",
+    "tsx": "^4.22.4",
+    "typebox": "^1.3.2",
     "typescript": "^5.9.2"
   },
   "repository": {
